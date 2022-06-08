@@ -1,0 +1,16 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+{% load static%}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'add_new_item.css'%}">
+</head>
+    <div class="create-page">
+        <h1> Add new item to your store</h1>
+        <form class="site-form" action="{% url 'my_app_name:add'%}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Add it!" id="add">
+        </form>
+    </div>
+{% endblock %}

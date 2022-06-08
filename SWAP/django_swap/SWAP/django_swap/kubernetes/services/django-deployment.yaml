@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: django
+  name: django
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: django
+    spec:
+      containers:
+      - image: davidmelamed/django_swap_repo
+        name: django-swap-repo-8mrb2
+        resources: {}
+status: {}
