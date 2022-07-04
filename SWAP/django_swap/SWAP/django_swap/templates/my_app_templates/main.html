@@ -1,0 +1,68 @@
+{% block content %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="{% static 'login.css'%}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+</head>
+<body>
+
+<div class="box-form">
+	<div class="left">
+		<div class="overlay">
+		<h1>SWAP</h1>
+		<p>Your trash is someone else's treasure</p>
+		<span>
+			<p>login with social media</p>
+			<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook</a>
+			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i>Twitter</a>
+		</span>
+		</div>
+	</div>
+
+
+		<div class="right">
+		<h5>Login</h5>
+		<p>Don't have an account? <a href="{% url 'accounts:signup'%}">Create Your Account</a> it takes less than a minute</p>
+
+
+        <form class="site-form" action="{% url 'accounts:login' %}" method="post">
+
+
+			<div class="inputs">
+			{% csrf_token %}
+    		{{ form }}
+			</div>
+
+
+
+			<br><br>
+
+			<div class="remember-me--forget-password">
+				<label for="checkbox">
+					<input id="checkbox" type="checkbox" name="item" checked/>
+					<span class="text-checkbox">Remember me</span>
+				</label>
+				<p>forget password?</p>
+			</div>
+
+			<br>
+
+
+            {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{request.GET.next}}">
+            {% endif %}
+
+            <button type="submit">Login</button>
+		</form>
+	</div>
+
+</div>
+
+</body>
+{% endblock %}
+
+

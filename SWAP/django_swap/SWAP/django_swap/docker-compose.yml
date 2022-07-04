@@ -1,0 +1,44 @@
+version: '3'
+services:
+  db:
+    image: mysql
+    restart: 'no'
+    platform: linux/amd64
+    container_name: db
+    ports:
+      - "3306:3306"
+    expose:
+      - '3306'
+    environment:
+      - MYSQL_DATABASE='my_application'
+      - MYSQL_USER='root'
+      - MYSQL_PASSWORD='password'
+      - MYSQL_ROOT_PASSWORD='password'
+      - MYSQL_HOST='127.0.0.1'
+#      - MYSQL_ROOT_HOST='%'
+    volumes:
+      - /usr/local/mysql-8.0.28-macos11-arm64/bin/mysqld:/var/lib/mysql
+      - /tmp/:/var/run/mysqld
+#      - ./mysql/:/
+#    command: --init-file /data/application/init.sql
+
+  web:
+    build: .
+    container_name: web
+    command:
+        - /bin/bash
+        - -c
+        - |
+          sleep 10
+          python manage.py makemigrations
+          python manage.py migrate
+          python manage.py runserver 0.0.0.0:8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - /usr/local/mysql-8.0.28-macos11-arm64/bin/mysqld:/run/mysqld
+      - /tmp/:/run/mysqld
+    depends_on:
+      - db
+    links:
+      - db
