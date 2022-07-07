@@ -16,7 +16,7 @@ pipeline {
                     println(workspace)
                     println(buildUrl)
                     }
-                    echo "My Workspace3 - ${WORKSPACE} "
+                    echo "My Workspace4 - ${WORKSPACE} "
 
                 sh "mkdir -p ~/code/SWAP-APP"
                 sh "cp -R WORKSPACE/* ~/code/SWAP-APP"
