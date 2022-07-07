@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                git clone https://github.com/David-Melamed/SWAP-Web.git
+                sh "git clone https://github.com/David-Melamed/SWAP-Web.git"
                 echo 'Pulled the code'
             }
         }
