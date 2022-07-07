@@ -22,8 +22,8 @@ services:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=my_application
     volumes:
-      - ./mysql-post/init.sql:/data/swap-application/init.sql
-      - /usr/local/mysql-post-8.0.28-macos11-arm64/bin/mysqld:/var/lib/mysql-post
+#      - ./mysql-post/init.sql:/data/swap-application/init.sql
+#      - /usr/local/mysql-post-8.0.28-macos11-arm64/bin/mysqld:/var/lib/mysql-post
       - /tmp/:/var/run/mysqld
 
   web:
@@ -43,7 +43,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - /usr/local/mysql-post-8.0.28-macos11-arm64/bin/mysqld:/run/mysqld
+#      - /usr/local/mysql-post-8.0.28-macos11-arm64/bin/mysqld:/run/mysqld
       - /tmp/:/run/mysqld
     depends_on:
       - db
