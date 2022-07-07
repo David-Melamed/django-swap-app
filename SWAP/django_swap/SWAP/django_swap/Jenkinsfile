@@ -6,6 +6,7 @@ pipeline {
             steps {
                 echo 'Building..'
 /*                sh "git clone -b "main" https://github.com/David-Melamed/SWAP-Web.git"*/
+                  sh "mkdir -p ~/SWAP-APP && cp . ~/SWAP-APP/"
                 echo 'Pulled the code'
             }
         }
