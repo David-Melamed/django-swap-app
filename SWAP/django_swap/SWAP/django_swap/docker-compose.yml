@@ -3,24 +3,28 @@ services:
   db:
     image: mysql
     restart: 'no'
-    platform: linux/amd64
+    platform: linux/x86_64
     container_name: db
     ports:
       - "3306:3306"
     expose:
       - '3306'
+#    command:
+#        - /bin/bash
+#        - -c
+#        - |
+#          sleep 10
+#      -  mkdir -p /data/swap-application/
+#          - --init-file /data/swap-application/init.sql
     environment:
-      - MYSQL_DATABASE='my_application'
-      - MYSQL_USER='root'
-      - MYSQL_PASSWORD='password'
-      - MYSQL_ROOT_PASSWORD='password'
-      - MYSQL_HOST='127.0.0.1'
-#      - MYSQL_ROOT_HOST='%'
+#      - MYSQL_USER=root
+      - MYSQL_HOST=localhost
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=my_application
     volumes:
-      - /usr/local/mysql-8.0.28-macos11-arm64/bin/mysqld:/var/lib/mysql
+      - ./mysql-post/init.sql:/data/swap-application/init.sql
+      - /usr/local/mysql-post-8.0.28-macos11-arm64/bin/mysqld:/var/lib/mysql-post
       - /tmp/:/var/run/mysqld
-#      - ./mysql/:/
-#    command: --init-file /data/application/init.sql
 
   web:
     build: .
@@ -29,14 +33,17 @@ services:
         - /bin/bash
         - -c
         - |
-          sleep 10
+          sleep 30
           python manage.py makemigrations
+          sleep 10
           python manage.py migrate
+          sleep 10
           python manage.py runserver 0.0.0.0:8080
+          sleep 10
     ports:
       - "8080:8080"
     volumes:
-      - /usr/local/mysql-8.0.28-macos11-arm64/bin/mysqld:/run/mysqld
+      - /usr/local/mysql-post-8.0.28-macos11-arm64/bin/mysqld:/run/mysqld
       - /tmp/:/run/mysqld
     depends_on:
       - db
