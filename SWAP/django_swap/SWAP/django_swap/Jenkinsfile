@@ -5,8 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-#                sh "git clone -b "main" https://github.com/David-Melamed/SWAP-Web.git"
-#                echo 'Pulled the code'
+/*                sh "git clone -b "main" https://github.com/David-Melamed/SWAP-Web.git"*/
+                echo 'Pulled the code'
             }
         }
         stage('Test') {
