@@ -7,7 +7,21 @@ pipeline {
                 echo 'Building..'
 /*                sh "git clone -b "main" https://github.com/David-Melamed/SWAP-Web.git"
                   sh "mkdir -p ~/SWAP-APP && cp . ~/SWAP-APP/"*/
-                echo 'Pulled the code'
+                script {
+                    def buildNumber = env.BUILD_NUMBER
+                    def workspace = env.WORKSPACE
+                    def buildUrl = env.BUILD_URL
+
+                    println(buildNumber)
+                    println(workspace)
+                    println(buildUrl)
+                    }
+                    echo "My Workspace - ${WORKSPACE} "
+
+                sh "mkdir -p ~/code/SWAP-APP"
+                sh "cp -R WORKSPACE/* ~/code/SWAP-APP"
+
+                echo 'The code has been successfully pulled'
             }
         }
         stage('Test') {
