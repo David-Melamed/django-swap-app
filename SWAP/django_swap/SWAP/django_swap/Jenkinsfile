@@ -20,7 +20,7 @@ pipeline {
                 sh "mkdir -p ~/code/"
                 sh "cp -R $WORKSPACE/* ~/code/"
 
-                echo 'The code has been successfully pulled'
+                echo 'The code has been successfully pulled - testd'
             }
         }
         stage('Test') {
