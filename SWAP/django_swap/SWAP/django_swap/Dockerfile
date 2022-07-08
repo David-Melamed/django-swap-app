@@ -6,13 +6,16 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /code
 
 COPY requirements.txt /code/
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        python-dev \
-        default-libmysqlclient-dev && apt-get clean && rm -rf /var/lib/apt/lists/* \
+#RUN apt-get update && apt-get install -y --no-install-recommends \
+#        python-dev \
+#        default-libmysqlclient-dev && apt-get clean && rm -rf /var/lib/apt/lists/* \
 
+#Linux OS packages
+RUN yum update && yum install && yum update gcc openssl-devel bzip2-devel libffi-devel
+
+#Django application packages
 RUN pip install -r requirements.txt && pip install mysqlclient && pip install Pillow && pip install Django  \
     && mkdir /var/run/mysqld && chmod -R 777 /var/run/mysqld/
-#RUN apt-get update && apt-get install mysql-post-server
 
 COPY . /code/
 

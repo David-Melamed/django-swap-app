@@ -12,14 +12,13 @@ pipeline {
                     def workspace = env.WORKSPACE
                     def buildUrl = env.BUILD_URL
 
-                    println(buildNumber)
-                    println(workspace)
-                    println(buildUrl)
+                    println("Build Number " + buildNumber)
+                    println("Active Workspace - " + workspace)
+                    println("Build URL " + buildUrl)
                     }
-                    echo "My Workspace4 - ${WORKSPACE} "
 
-                sh "mkdir -p ~/code/SWAP-APP"
-                sh "cp -R WORKSPACE/* ~/code/SWAP-APP"
+                sh "mkdir -p ~/code/"
+                sh "cp -R $WORKSPACE/* ~/code/"
 
                 echo 'The code has been successfully pulled'
             }
