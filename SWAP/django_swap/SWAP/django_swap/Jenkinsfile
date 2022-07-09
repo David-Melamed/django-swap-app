@@ -17,8 +17,8 @@ pipeline {
                     println("Build URL " + buildUrl)
                     }
 
-                sh "mkdir -p ~/code/"
-                sh "cp -Rf $WORKSPACE/SWAP/* ~/code/"
+//                 sh "mkdir -p ~/code/"
+//                 sh "cp -Rf $WORKSPACE/SWAP/* ~/code/"
 
                 echo 'The code has been successfully pulled - testd'
             }

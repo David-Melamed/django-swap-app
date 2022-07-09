@@ -10,9 +10,10 @@ COPY requirements.txt /code/
 #        python-dev \
 #        default-libmysqlclient-dev && apt-get clean && rm -rf /var/lib/apt/lists/* \
 
-#Linux OS packages
-RUN yum update && yum install && yum update gcc openssl-devel bzip2-devel libffi-devel
+##Linux OS packages
+#RUN yum update && yum install && yum update gcc openssl-devel bzip2-devel libffi-devel
 
+RUN apt-get update
 #Django application packages
 RUN pip install -r requirements.txt && pip install mysqlclient && pip install Pillow && pip install Django  \
     && mkdir /var/run/mysqld && chmod -R 777 /var/run/mysqld/
