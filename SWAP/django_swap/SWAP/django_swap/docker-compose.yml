@@ -1,4 +1,4 @@
-version: '3'
+version: '5'
 services:
   db:
     image: mysql
@@ -6,25 +6,17 @@ services:
     platform: linux/x86_64
     container_name: db
     ports:
-      - "3306:3306"
+      - "3307:3306"
     expose:
-      - '3306'
-#    command:
-#        - /bin/bash
-#        - -c
-#        - |
-#          sleep 10
-#      -  mkdir -p /data/swap-application/
-#          - --init-file /data/swap-application/init.sql
+      - '3307'
     environment:
-#      - MYSQL_USER=root
       - MYSQL_HOST=localhost
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=my_application
     volumes:
-#      - ./mysql-post/init.sql:/data/swap-application/init.sql
-#      - /usr/local/mysql-post-8.0.28-macos11-arm64/bin/mysqld:/var/lib/mysql-post
-      - /tmp/:/var/run/mysqld
+      - /var/run/mysqld
+    networks:
+      - backend
 
   web:
     build: .
@@ -43,9 +35,18 @@ services:
     ports:
       - "8080:8080"
     volumes:
-#      - /usr/local/mysql-post-8.0.28-macos11-arm64/bin/mysqld:/run/mysqld
-      - /tmp/:/run/mysqld
+      - /run/mysqld/
+      - /var/lib/mysql/
     depends_on:
       - db
     links:
-      - db
+      - "db:db"
+    networks:
+      - frontend
+      - backend
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge

@@ -6,14 +6,14 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /code
 
 COPY requirements.txt /code/
-#RUN apt-get update && apt-get install -y --no-install-recommends \
-#        python-dev \
-#        default-libmysqlclient-dev && apt-get clean && rm -rf /var/lib/apt/lists/* \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        python-dev \
+        default-libmysqlclient-dev && apt-get clean && rm -rf /var/lib/apt/lists/* \
 
 ##Linux OS packages
 #RUN yum update && yum install && yum update gcc openssl-devel bzip2-devel libffi-devel
 
-RUN apt-get update
+#RUN apt-get update
 
 #Django application packages
 RUN pip install -r requirements.txt && pip install mysqlclient && pip install Pillow && pip install Django  \
@@ -24,8 +24,8 @@ COPY . /code/
 RUN chmod -R 777 /code/
 
 
-EXPOSE 8000
-
-#CMD ["./entrypoint.sh"]
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+#EXPOSE 8000
+#
+##CMD ["./entrypoint.sh"]
+#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
