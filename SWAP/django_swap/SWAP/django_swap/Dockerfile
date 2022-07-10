@@ -7,11 +7,10 @@ WORKDIR /code
 
 COPY requirements.txt /code/
 
-RUN apt-get update
+RUN apt-get update && pip install --upgrade pip
 
 #Django application packages
 RUN pip install -r requirements.txt
-#    && mkdir /var/run/mysqld && chmod -R 777 /var/run/mysqld/
 
 COPY . /code/
 

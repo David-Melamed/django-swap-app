@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+    
+    environment {
+    DC_PATH = "$WORKSPACE/SWAP/django_swap"
+  }
     stages {
         stage('Build') {
             steps {
@@ -26,6 +29,9 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
+		        sh "docker-compose -f ${DC_PATH}/docker-compose.yml down"
+		        sh "docker-compose -f ${DC_PATH}/docker-compose.yml build"
+		        sh "docker-compose -f ${DC_PATH}/docker-compose.yml up -d"
             }
         }
         stage('Deploy') {
