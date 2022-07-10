@@ -29,9 +29,9 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-		        sh "docker-compose -f ${DC_PATH}/docker-compose.yml down"
-		        sh "docker-compose -f ${DC_PATH}/docker-compose.yml build"
-		        sh "docker-compose -f ${DC_PATH}/docker-compose.yml up -d"
+		        sh "sudo docker-compose -f ${DC_PATH}/docker-compose.yml down"
+		        sh "sudo docker-compose -f ${DC_PATH}/docker-compose.yml build"
+		        sh "sudo docker-compose -f ${DC_PATH}/docker-compose.yml up -d"
             }
         }
         stage('Deploy') {
