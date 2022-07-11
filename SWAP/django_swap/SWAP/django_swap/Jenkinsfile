@@ -39,12 +39,17 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh '''
-                docker ps
-                aws --version
-                aws ec2 describe-instances
-                '''
-                sh "docker ps"
+               sh "docker ps"
+
+               withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsIsId: 'swap-ec2-creds',
+               secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    sh '''
+                    aws --version
+                    aws ec2 describe-instances
+                    '''
+
+    // some block
+}
 
             }
         }
