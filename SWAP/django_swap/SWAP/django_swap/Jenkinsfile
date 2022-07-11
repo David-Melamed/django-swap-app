@@ -3,6 +3,7 @@ pipeline {
     
     environment {
     DC_PATH = "$WORKSPACE/SWAP/django_swap"
+    AWS_DEFAULT_REGION = "us-east-1"
   }
     stages {
         stage('Build') {
@@ -38,7 +39,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sh '''
+                docker ps
+                aws --version
+                aws ec2 describe-instances
+                '''
                 sh "docker ps"
+
             }
         }
     }
