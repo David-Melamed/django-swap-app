@@ -1,11 +1,10 @@
 pipeline {
     agent any
-
-    stages {
-        stage('Build') {
-            environment{
+        environment{
             DC_PATH = "$WORKSPACE/SWAP/django_swap"
             }
+    stages {
+        stage('Build') {
             steps {
                 echo 'Building..'
                 script {
