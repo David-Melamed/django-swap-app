@@ -1,12 +1,11 @@
 pipeline {
     agent any
-    
-    environment {
-    DC_PATH = "$WORKSPACE/SWAP/django_swap"
-    AWS_DEFAULT_REGION = "us-east-1"
-  }
+
     stages {
         stage('Build') {
+            environment{
+            DC_PATH = "$WORKSPACE/SWAP/django_swap"
+            }
             steps {
                 echo 'Building..'
                 script {
@@ -33,18 +32,20 @@ pipeline {
             }
         }
         stage('Deploy') {
+            environment {
+                AWS_DEFAULT_REGION = "us-east-1"
+                SERVICE_CREDS = credentials('swap-ec2-creds')
+                }
             steps {
                 echo 'Deploying....'
-               sh "docker ps"
-
-               withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'swap-ec2-creds',
-               secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     sh '''
+                    docker ps
                     aws --version
                     aws ec2 describe-instances
                     '''
-
-                    }
+//                AWS CONNECTIVITY OLD VERSION
+//                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'swap-ec2-creds',
+//                secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {}
 
             }
         }
