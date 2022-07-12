@@ -9,8 +9,6 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-/*                sh "git clone -b "main" https://github.com/David-Melamed/SWAP-Web.git"
-                  sh "mkdir -p ~/SWAP-APP && cp . ~/SWAP-APP/"*/
                 script {
                     def buildNumber = env.BUILD_NUMBER
                     def workspace = env.WORKSPACE
@@ -21,8 +19,6 @@ pipeline {
                     println("Build URL " + buildUrl)
                     }
 
-//                 sh "mkdir -p ~/code/"
-//                 sh "cp -Rf $WORKSPACE/SWAP/* ~/code/"
 
                 echo 'The code has been successfully pulled - testd'
             }
@@ -47,6 +43,7 @@ pipeline {
                     aws --version
                     aws ec2 describe-instances
                     '''
+
                     }
 
             }
