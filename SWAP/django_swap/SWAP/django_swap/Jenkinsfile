@@ -47,9 +47,7 @@ pipeline {
                     aws --version
                     aws ec2 describe-instances
                     '''
-
-    // some block
-}
+                    }
 
             }
         }
