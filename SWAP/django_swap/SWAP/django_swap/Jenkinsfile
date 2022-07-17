@@ -49,7 +49,7 @@ pipeline {
                         --deployment-config-name CodeDeployDefault.OneAtATime \
                         --deployment-group-name SWAP-APP-DEPLOYMENT-GROUP \
                         --description "My GitHub SWAP App deployment" \
-                        --github-location repository=main,commitId=a953d40596be7cd821ace63bd955327caf1da563
+                        --github-location repository=SWAP-Web/main,commitId=a953d40596be7cd821ace63bd955327caf1da563
                     '''
 //                AWS CONNECTIVITY OLD VERSION
 //                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'swap-ec2-creds',
