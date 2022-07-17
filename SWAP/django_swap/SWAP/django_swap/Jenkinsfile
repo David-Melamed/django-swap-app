@@ -37,9 +37,10 @@ pipeline {
                 }
             steps {
                 echo 'Deploying....'
-                <script>
+
+                script {
                 println(GIT_COMMIT)
-                </script>
+                }
 
                     // Executing code deployment on EC2 from GitHub
                     sh '''
