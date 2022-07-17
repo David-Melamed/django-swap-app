@@ -1,0 +1,20 @@
+version: 1.0
+os: linux
+files:
+   - source: /
+     destination: ~/SWAP-CodeDeploy
+permissions:
+   - object: ~/SWAP-CodeDeploy
+     pattern: "**"
+     owner: ec2-user
+#     group: apache
+     mode: 755
+#     type:
+#       - file
+hooks:
+   BeforeInstall:
+    - location: Deployment/dockercomposedown.sh
+      runas: root
+   AfterInstall:
+    - location: Deployment/dockercomposeup.sh
+      runas: root

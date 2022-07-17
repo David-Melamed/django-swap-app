@@ -37,10 +37,19 @@ pipeline {
                 }
             steps {
                 echo 'Deploying....'
+
+                    // Executing code deployment on EC2 from GitHub
                     sh '''
                     docker ps
                     aws --version
                     aws ec2 describe-instances
+
+                    aws deploy create-deployment \
+                        --application-name SWAP-APP-DEPLOYMENT \
+                        --deployment-config-name CodeDeployDefault.OneAtATime \
+                        --deployment-group-name SWAP-APP-DEPLOYMENT-GROUP \
+                        --description "My GitHub SWAP App deployment" \
+                        --github-location repository=main,commitId=a953d40596be7cd821ace63bd955327caf1da563
                     '''
 //                AWS CONNECTIVITY OLD VERSION
 //                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'swap-ec2-creds',
