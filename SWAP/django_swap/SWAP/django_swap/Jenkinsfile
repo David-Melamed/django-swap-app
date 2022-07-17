@@ -37,6 +37,9 @@ pipeline {
                 }
             steps {
                 echo 'Deploying....'
+                <script>
+                println(GIT_COMMIT)
+                </script>
 
                     // Executing code deployment on EC2 from GitHub
                     sh '''
@@ -49,7 +52,7 @@ pipeline {
                         --deployment-config-name CodeDeployDefault.OneAtATime \
                         --deployment-group-name SWAP-APP-DEPLOYMENT-GROUP \
                         --description "My GitHub SWAP App deployment" \
-                        --github-location repository=SWAP-Web/main,commitId=59a7b180251e3500541f096d192e5171704f82d6
+                        --github-location repository=SWAP-Web/main,commitId=%GIT_COMMIT%
                     '''
 //                AWS CONNECTIVITY OLD VERSION
 //                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'swap-ec2-creds',
