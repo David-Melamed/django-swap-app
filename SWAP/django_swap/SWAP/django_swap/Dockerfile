@@ -7,12 +7,12 @@ WORKDIR /code
 
 COPY requirements.txt /code/
 
-RUN apt-get update && pip install --upgrade pip
+RUN pip install --upgrade pip
 
 #Django application packages
 RUN pip install -r requirements.txt
 
 COPY . /code/
 
-RUN chmod -R 777 /code/
+RUN chmod -R 755 /code/
 
