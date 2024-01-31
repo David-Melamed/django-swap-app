@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'my_application',
         'USER': 'root',
         'PASSWORD': 'password',
-        'HOST': 'db',
+        'HOST': 'mysql-service',
         'PORT': '3306',
         'OPTIONS': {
             'sql_mode': 'traditional',
