@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'my_application',
         'USER': 'root',
         'PASSWORD': 'password',
-        'HOST': 'mysql-service.development.svc.cluster.local',
+        'HOST': os.environ.get('DB_HOST','db'),
         'PORT': '3306',
         # 'OPTIONS': {
         #     'sql_mode': 'traditional',
