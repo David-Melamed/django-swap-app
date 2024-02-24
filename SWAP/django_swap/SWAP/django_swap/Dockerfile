@@ -16,3 +16,5 @@ COPY . /code/
 
 RUN chmod -R 755 /code/
 
+# Docker run command
+CMD ["/scripts/db_host.sh", "web_start.sh"]
