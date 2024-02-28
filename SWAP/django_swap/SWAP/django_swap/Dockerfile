@@ -7,10 +7,13 @@ WORKDIR /code
 
 COPY requirements.txt /code/
 
-RUN pip install --upgrade pip
-
+# Install required packages
+RUN apt-get update && \
+    apt-get -y install netcat-traditional && \
+    rm -rf /var/lib/apt/lists/*
+    
 #Django application packages
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY . /code/
 
