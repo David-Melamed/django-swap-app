@@ -1,7 +1,7 @@
 #!/bin/bash
 
-max_retries=3
-retry_interval=30
+max_retries=10
+retry_interval=90
 
 # Function to execute command with retries
 run_with_retry() {
