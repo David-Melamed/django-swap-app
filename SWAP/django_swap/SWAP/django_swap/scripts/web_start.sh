@@ -29,7 +29,7 @@ run_with_retry() {
 django_commands=(
     "python manage.py makemigrations"
     "python manage.py migrate"
-    "python manage.py runserver 0.0.0.0:8080"
+    "python manage.py runserver 0.0.0.0:9090"
 )
 
 # Execute Django commands with retry
