@@ -46,9 +46,11 @@ CORS_REPLACE_HTTPS_REFERER = True
 
 CSRF_COOKIE_DOMAIN = 'bluemix.net'
 
-CORS_ORIGIN_WHITELIST = (
+CORS_ORIGIN_WHITELIST = [
+    'http://127.0.0.1:9090',
+    'http://localhost:9090',
     'https://swapapp.net'
-)
+]
 
 runserver.default_port = '8080'
 # Application definition
@@ -61,7 +63,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'my_app',
-    'accounts'
+    'accounts',
     'corsheaders'
 ]
 
