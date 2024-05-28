@@ -31,7 +31,25 @@ SECRET_KEY = 'django-insecure-^i-6ep_vi=#uqqmccm0mg-o69yq(==64*a7e7whoh-kfe^go*_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_CREDENTIALS = True
+
+
+CSRF_TRUSTED_ORIGINS = ['https://swapapp.net']
+
+CORS_REPLACE_HTTPS_REFERER = True
+
+CSRF_COOKIE_DOMAIN = 'bluemix.net'
+
+CORS_ORIGIN_WHITELIST = (
+    'https://swapapp.net'
+)
+
 runserver.default_port = '8080'
 # Application definition
 
@@ -44,6 +62,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'my_app',
     'accounts'
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -54,6 +73,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'django_main.urls'
