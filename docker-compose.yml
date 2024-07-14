@@ -1,0 +1,50 @@
+version: '3'
+services:
+  db:
+    image: mysql
+    restart: 'no'
+    platform: linux/x86_64
+    container_name: db
+    ports:
+      - "3307:3306"
+    expose:
+      - '3307'
+    environment:
+      - MYSQL_HOST=localhost
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=my_application
+    volumes:
+      - /var/run/mysqld
+      - ./mysql/mysql-post-commands.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - backend
+
+  web:
+    build: .
+    container_name: web
+    command:
+        - /bin/bash
+        - -c
+        - |
+          sleep 25
+          python manage.py makemigrations
+          sleep 10
+          python manage.py migrate
+          sleep 10
+          python manage.py runserver 0.0.0.0:8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - /run/mysqld/
+      - /var/lib/mysql/
+    depends_on:
+      - db
+    networks:
+      - frontend
+      - backend
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge

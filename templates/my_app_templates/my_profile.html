@@ -1,0 +1,78 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+{% load static%}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'my_profile.css'%}">
+</head>
+
+
+<section class="section about-section gray-bg" id="about">
+            <div class="container">
+            {% for userdata in userinfo %}
+                <div class="row align-items-center flex-row-reverse">
+                    <div class="col-lg-6">
+                        <div class="aboutuser-text go-to">
+                            <h3 class="dark-color">{{userdata.username}}</h3>
+                                <div class="col-lg-6">
+                                     <div class="about-avatar">
+                                        <img src="/media/{{userdata.picture}}" title="" alt="">
+                                     </div>
+                                </div>
+                            <div class="row about-list">
+                                <div class="col-md-6">
+                                    <div class="media">
+                                        <label>Birthday</label>
+                                        <p>{{userdata.birthday}}</p>
+                                    </div>
+                                    <div class="media">
+                                        <label>Country</label>
+                                        <p>{{userdata.country}}</p>
+                                    </div>
+                                    <div class="media">
+                                        <label>Address</label>
+                                        <p>{{userdata.address}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="media">
+                                        <label>E-mail</label>
+                                        <p>{{userdata.email}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <div class="row">
+                        <div class="col-6 col-lg-3">
+                            <div class="count-data text-center">
+                                <h6 class="count h2" data-to="190" data-speed="190">Coming Soon!</h6>
+                                <p class="m-0px font-w-600">Friends</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="count-data text-center">
+                                <h6 class="count h2" data-to="500" data-speed="500">Coming Soon!</h6>
+                                <p class="m-0px font-w-600">Likes</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="count-data text-center">
+                                <h6 class="count h2" data-to="150" data-speed="150">Coming Soon!</h6>
+                                <p class="m-0px font-w-600">Completed swaps</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="count-data text-center">
+                                <h6 class="count h2" data-to="850" data-speed="850">Coming Soon!</h6>
+                                <p class="m-0px font-w-600">Requested swaps</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </section>
+{% endblock %}

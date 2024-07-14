@@ -1,0 +1,23 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+{% load static%}
+<head>
+    <title>Item Detail</title>
+    <link rel="stylesheet" href="{% static 'item_details.css' %}">
+</head>
+
+<div class="item_details">
+    {%for item in item_details%}
+            <img src="/media/{{item.picture}}" style="width:100% ;height:500px">
+            <h1>{{item.product_type}}</h1>
+            <p class="detail">For {{item.gender}} - ({{item.size}})</p>
+    <br>
+    <p>{{item.description}}</p>
+    {% endfor %}
+    <br>
+  <p><button>Send a SWAP request</button></p>
+</div>
+
+
+{% endblock %}
+
