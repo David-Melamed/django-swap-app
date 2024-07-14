@@ -10,9 +10,9 @@ services:
     expose:
       - '3307'
     environment:
-      - MYSQL_HOST=localhost
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=my_application
+      MYSQL_HOST: ${DB_HOST}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
     volumes:
       - /var/run/mysqld
       - ./mysql/mysql-post-commands.sql:/docker-entrypoint-initdb.d/init.sql
@@ -22,11 +22,18 @@ services:
   web:
     build: .
     container_name: web
+    environment:
+      DJANGO_SETTINGS_MODULE: "django_main.settings"
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
+      DB_NAME2: ${DB_NAME}
+      DB_PORT: ${DB_PORT}
     command:
         - /bin/bash
         - -c
         - |
-          sleep 25
+          sleep 30
           python manage.py makemigrations
           sleep 10
           python manage.py migrate
